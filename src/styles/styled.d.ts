@@ -10,6 +10,5 @@ declare module 'styled-components' {
             background: string,
             backgroundSecondary: string
         },
-        justifyContent?: string
     }
 }

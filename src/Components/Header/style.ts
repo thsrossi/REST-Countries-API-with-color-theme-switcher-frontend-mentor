@@ -12,6 +12,7 @@ export const Container = styled.div `
 export const Row = styled.div `
     display: flex;
     width: 100%;
-    justify-content: ${props => props.justifyContent || ''};
+    justify-content: ${(props: any) => props.justifyContent || ''};
     flex-wrap: wrap;
+    margin: auto;
 `

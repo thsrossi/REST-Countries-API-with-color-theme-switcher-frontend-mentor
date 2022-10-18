@@ -1,10 +1,21 @@
-import React from "react";
+import Grid from "@mui/material/Grid";
+import React, { useEffect, useState } from "react";
 import { Row } from "../Components/Header/style";
+import getAllCountries from "../../API/APIGlobal"
 
 import { HomePage } from "./homeStyle";
 
 export default function Home() {
+    const [countries, setCountries] = useState<any>([])
+    useEffect(()=>{
+        setCountries(getAllCountries())
+        console.log(getAllCountries())
+    },[])
+
+    console.log(countries)
+
     const optionsRegion = [
+        {label: 'All', value: 'all'},
         { label: 'Africa', value: 'Africa' },
         { label: 'America', value: 'America' },
         { label: 'Asia', value: 'Asia' },
@@ -27,17 +38,20 @@ export default function Home() {
                     })}
                 </select>
             </Row>
-            <div className="flex">
-                <div className="flex-none ...">
+            <Grid container justifyContent={'space-between'} className="flex">
+                <Grid item xs={12} sm={6} md={3}>
                     01
-                </div>
-                <div className="flex-1 p-28">
+                </Grid >
+                <Grid item xs={12} sm={6} md={3}>
                     02
-                </div>
-                <div className="flex-1 w-32 ...">
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
                     03
-                </div>
-            </div>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                    04
+                </Grid>
+            </Grid>
 
         </HomePage >
     )

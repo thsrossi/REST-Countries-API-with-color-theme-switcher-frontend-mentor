@@ -12,7 +12,7 @@ interface Props{
 
 export function CountrieCard({countrie}: Props){
     return(
-    <Card sx={{ maxWidth: '345px', borderRadius: '6px'}}>
+    <Card sx={{ width: '255.4px', borderRadius: '6px', zIndex: 0}}>
       <CardActionArea sx={{ paddingBottom: 3 }}>
         <CardMedia
           component="img"
@@ -28,9 +28,9 @@ export function CountrieCard({countrie}: Props){
             {countrie?.name.common}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Population: {countrie.population} <br/>
+            Population: {countrie.population.toLocaleString('pt-BR')} <br/>
             Region: {countrie.region} <br/>
-            Capital: {countrie.capital} <br/>
+            {countrie.capital ? `Capital: ${countrie.capital}`: ''} <br/>
           </Typography>
         </CardContent>
       </CardActionArea>

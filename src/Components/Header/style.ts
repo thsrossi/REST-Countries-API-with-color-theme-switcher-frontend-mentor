@@ -15,6 +15,7 @@ export const Row = styled.div `
     justify-content: space-between;
     flex-wrap: wrap;
     margin: auto;
-    z-index: 1;
-    padding-bottom: 20px
+    z-index: 2;
+    padding-bottom: 20px;
+    margin-bottom: 20px
 `

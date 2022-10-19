@@ -15,6 +15,16 @@ function App() {
   const themeMui = createTheme({
     palette: {      
         mode: theme?.title == 'light' ? 'light' : 'dark',
+        background:{
+          default: theme.colors.background,
+          paper: theme.colors.backgroundSecondary
+        },
+        primary: {
+          main: theme.colors.primary,
+          dark: theme.colors.primary,
+          light: theme.colors.primary,
+          contrastText: theme.colors.primary
+        }
     },
     typography:{
       h6 : {
@@ -36,8 +46,9 @@ function App() {
     <div className="App">
       <GlobalStyle/>
       {/* <CssBaseline/> */}
-      <Header toggleTheme={toggleTheme}/>
       <MuiTheme theme={themeMui}>
+      <Header toggleTheme={toggleTheme}/>
+      
       <Home/>
       
       </MuiTheme>

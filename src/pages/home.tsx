@@ -5,17 +5,20 @@ import getAllCountries from "../../API/APIGlobal"
 
 import { HomePage } from "./homeStyle";
 import { CountrieCard } from "../Components/Card/card";
-import { Grow, Skeleton, Stack, Typography } from "@mui/material";
+import { Container, Grow, InputAdornment, OutlinedInput, Skeleton, Stack, Typography } from "@mui/material";
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
 
 export default function Home() {
     const [countries, setCountries] = useState<any>([])
     const [filters, setFilters] = useState("all")
     const [isLoading, setIsLoading] = useState(true)
+    const [searchByName, setSearchByName] = useState("")
 
     async function getCountries() {
-        setIsLoading(true)
-        filters == "all" &&
-            setCountries(await getAllCountries())
+        setIsLoading(true);
+        (filters == "all" || filters == "") &&
+        setCountries(await getAllCountries())
         setIsLoading(false)
     }
 
@@ -35,13 +38,22 @@ export default function Home() {
     ]
 
     return (
-        <HomePage>
+        <Container>
 
             <Row>
-                <div>
-                    <input type="text" />
-                </div>
-                <select>
+                
+                <OutlinedInput 
+                    onChange={(e:any)=>{setSearchByName(e.target.value)}}
+                    placeholder="Search for a country..." 
+                    startAdornment={
+                        <InputAdornment position="start">
+                        <SearchOutlinedIcon/>
+                        </InputAdornment>
+                    }
+                />
+                
+                <select placeholder="">
+                    <option value="" disabled selected>Filter By Region</option>
                     {optionsRegion.map((option: any, index: number) => {
                         return (
                             <option key={index} value={option.value}>{option.label}</option>
@@ -51,11 +63,11 @@ export default function Home() {
             </Row>
 
             <Grid
-                container justifyContent={'space-between'} alignItems={'center'} spacing={6}
-                sx={{ zIndex: 0 }}
+                container  spacing={7}
+                sx={{ zIndex: 0, marginTop: '20px'}} 
             >
                 {isLoading ? 
-                    [...Array(8)].map((e: any, index:any) => {
+                    [...Array(12)].map((e: any, index:any) => {
                         return (
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} justifyContent={'center'}>
                                 <Stack spacing={1} justifyContent={'center'}>
@@ -75,19 +87,32 @@ export default function Home() {
                     })
 
                 :
-                countries?.map((countrie: any, index: any) => {
+                countries?.filter((country:any)=>{
+                    if(searchByName == ""){
+                        return country
+                    }
+                    else if(country?.altSpellings?.some((altSpelling:string)=>{
+                        console.log(altSpelling)
+                        altSpelling?.toLowerCase()?.includes(searchByName?.toLowerCase())
+
+                    })){
+                        return country
+                    }
+                })?.map((countrie: any, index: any) => {
                     return (
                         
-                        <Grid key={index} item xs={12} sm={6} md={4} lg={3} justifyContent={'center'}>
+                        <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                             {/* <Grow in={!isLoading}> */}
                                 <CountrieCard countrie={countrie} />
                             {/* </Grow> */}
                         </Grid >
                     )
-                }).slice(0, 20)}
+                })
+                // .slice(0, 20)
+                }
 
             </Grid>
 
-        </HomePage >
+        </Container >
     )
 }

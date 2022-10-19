@@ -8,18 +8,22 @@ import dark from './styles/themes/dark'
 import usePersistedState from './utils/usePersistedState'
 import Home from './pages/home'
 import { ThemeProvider as MuiTheme, createTheme } from '@mui/material/styles'
-import Slider from '@mui/material/Slider';
-
 
 function App() {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light)
 
   const themeMui = createTheme({
-    palette: {
-      primary: {
-        main: '#087',
-      },
+    palette: {      
+        mode: theme?.title == 'light' ? 'light' : 'dark',
     },
+    typography:{
+      h6 : {
+        display: 'inline-block', 
+        overflow: 'hidden', 
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        maxWidth: '100%'
+    }}
   })
 
   const toggleTheme = () =>{
@@ -31,6 +35,7 @@ function App() {
       
     <div className="App">
       <GlobalStyle/>
+      {/* <CssBaseline/> */}
       <Header toggleTheme={toggleTheme}/>
       <MuiTheme theme={themeMui}>
       <Home/>

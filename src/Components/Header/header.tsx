@@ -8,9 +8,9 @@ interface Props{
 export function Header({toggleTheme}: Props){
     return(
         <Container>
-            <h3>
+            <h2>
                 Where in the world?
-            </h3>
+            </h2>
             <button 
                 onClick={toggleTheme}
             >

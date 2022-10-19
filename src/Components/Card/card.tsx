@@ -12,16 +12,19 @@ interface Props{
 
 export function CountrieCard({countrie}: Props){
     return(
-    <Card sx={{ maxWidth: 345, margin: 0}}>
+    <Card sx={{ maxWidth: '345px', borderRadius: '6px'}}>
       <CardActionArea sx={{ paddingBottom: 3 }}>
         <CardMedia
           component="img"
           height="170"
           image={countrie?.flags.png}
-          alt={countrie?.name.common + "flag"}
+          alt={countrie?.name.common + " flag"}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div" 
+        //   sx={{display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis'
+        //   }}
+          >
             {countrie?.name.common}
           </Typography>
           <Typography variant="body2" color="text.secondary">

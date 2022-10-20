@@ -16,6 +16,6 @@ export const Row = styled.div `
     flex-wrap: wrap;
     margin: auto;
     z-index: 2;
-    padding-bottom: 20px;
-    margin-bottom: 20px
+    margin-bottom: 30px;
+    margin-top: 30px
 `

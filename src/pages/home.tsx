@@ -26,7 +26,7 @@ export default function Home() {
         getCountries()
     }, [filters])
 
-    console.log(countries)
+    console.log(countries[0])
 
     const optionsRegion = [
         { label: 'All', value: 'all' },
@@ -44,6 +44,7 @@ export default function Home() {
                 
                 <OutlinedInput 
                     onChange={(e:any)=>{setSearchByName(e.target.value)}}
+                    value={searchByName}
                     placeholder="Search for a country..." 
                     startAdornment={
                         <InputAdornment position="start">
@@ -90,25 +91,22 @@ export default function Home() {
                 countries?.filter((country:any)=>{
                     if(searchByName == ""){
                         return country
-                    }
-                    else if(country?.altSpellings?.some((altSpelling:string)=>{
-                        console.log(altSpelling)
-                        altSpelling?.toLowerCase()?.includes(searchByName?.toLowerCase())
-
-                    })){
+                    }else if(country?.altSpellings?.some((element:any, index: number) => {
+                            return element?.toLowerCase().includes(searchByName.toLowerCase())
+                    }))
+                            {
                         return country
                     }
-                })?.map((countrie: any, index: any) => {
+                }).map((country: any, index: any) => {
                     return (
                         
                         <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                             {/* <Grow in={!isLoading}> */}
-                                <CountrieCard countrie={countrie} />
+                                <CountrieCard countrie={country} />
                             {/* </Grow> */}
                         </Grid >
                     )
-                })
-                // .slice(0, 20)
+                })?.slice(0,20)
                 }
 
             </Grid>

@@ -1,12 +1,14 @@
 import Grid from "@mui/material/Grid";
 import React, { useEffect, useState } from "react";
-import { Row } from "../Components/Header/style";
-import getAllCountries from "../../API/APIGlobal"
+import { Row } from "../../Components/Header/style";
+import getAllCountries from "../../../API/APIGlobal"
+import getCountriesByRegion from "../../../API/APICountriesByRegion"
 
-import { CountrieCard } from "../Components/Card/card";
+import { CountrieCard } from "../../Components/Card/card";
 import { Container, FormControl, Grow, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Skeleton, Stack, Typography } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { SearchInput, SelectRegion } from "../Components/styledMUI";
+import { SearchInput, SelectRegion } from "../../Components/styledMUI";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Home() {
@@ -15,16 +17,22 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [searchByName, setSearchByName] = useState("")
 
+    const navigate = useNavigate();
+
     async function getCountries() {
         setIsLoading(true);
-        (filters == "all" || filters == "") &&
+        if(filters == "all" || filters == ""){
             setCountries(await getAllCountries())
-        setIsLoading(false)
-    }
+            setIsLoading(false)
+        }else{
+            setCountries(await getCountriesByRegion(filters))
+            setIsLoading(false)
+        }
+    };
 
     useEffect(() => {
         getCountries()
-    }, [filters])
+    }, [filters]);
 
     const optionsRegion = [
         { label: 'All', value: 'all' },
@@ -124,7 +132,7 @@ export default function Home() {
 
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                                 {/* <Grow in={!isLoading}> */}
-                                <div onClick={(e:any)=>{console.log(country)}}>
+                                <div onClick={() => navigate(`/details/${country?.name.common}`)}>
                                 <CountrieCard countrie={country} />
                                 </div>
                                 {/* </Grow> */}

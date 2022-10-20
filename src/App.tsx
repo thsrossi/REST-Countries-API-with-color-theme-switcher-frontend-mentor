@@ -6,9 +6,10 @@ import { Header } from './Components/Header/header'
 import light from './styles/themes/light'
 import dark from './styles/themes/dark'
 import usePersistedState from './utils/usePersistedState'
-import Home from './pages/home'
+import Home from './pages/Home/home'
 import { ThemeProvider as MuiTheme, createTheme } from '@mui/material/styles'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Details } from './pages/Details/details'
 
 function App() {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light)
@@ -50,7 +51,7 @@ function App() {
             <Header toggleTheme={toggleTheme} />
             <Routes>
               <Route path="/" element={<Home/>}/>
-              <Route path="*" element={<Home/>}/>
+              <Route path="/details/:id" element={<Details/>}/>
             </Routes>
             
           </MuiTheme>

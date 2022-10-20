@@ -6,6 +6,7 @@ import getAllCountries from "../../API/APIGlobal"
 import { CountrieCard } from "../Components/Card/card";
 import { Container, FormControl, Grow, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Skeleton, Stack, Typography } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { SearchInput, SelectRegion } from "../Components/styledMUI";
 
 
 export default function Home() {
@@ -35,11 +36,11 @@ export default function Home() {
     ]
 
     return (
-        <Container>
+        <Container >
 
             <Row>
 
-                <OutlinedInput
+                <SearchInput
                     
                     onChange={(e: any) => { setSearchByName(e.target.value) }}
                     value={searchByName}
@@ -52,7 +53,7 @@ export default function Home() {
                     }
                 />
 
-                <FormControl sx={{minWidth:'180px'}}>
+                <SelectRegion sx={{minWidth:'180px'}}>
                     <InputLabel id="select-label-filter" htmlFor="select">Filter By Region</InputLabel>
                     <Select
                         labelId="select-label-filter"
@@ -69,7 +70,7 @@ export default function Home() {
                         )
                     })}
                     </Select>
-                </FormControl>
+                </SelectRegion>
 
                 {/* <select placeholder="">
                     <option value="" disabled selected>Filter By Region</option>
@@ -83,12 +84,12 @@ export default function Home() {
 
             <Grid
                 container spacing={7}
-                sx={{ zIndex: 0 }}
+                sx={{ zIndex: 0, paddingBottom: '30px' }}
             >
                 {isLoading ?
                     [...Array(12)].map((e: any, index: any) => {
                         return (
-                            <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
+                            <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                 <Stack spacing={1} justifyContent={'center'} sx={{width:'255.4px' }}>
                                     <Skeleton animation="wave" variant="rounded" sx={{ maxWidth: '345px' }} height={170} />
                                     <Typography sx={{ pl: 1 }} variant="h6"><Skeleton animation="wave" width="70%" /></Typography>
@@ -111,7 +112,11 @@ export default function Home() {
                             return country
                         } else if (country?.altSpellings?.some((element: any, index: number) => {
                             return element?.toLowerCase().includes(searchByName.toLowerCase())
-                        }) || country?.name.common.toLowerCase().includes(searchByName.toLowerCase())) {
+                        }) || country?.name.common.toLowerCase().includes(searchByName.toLowerCase()) || 
+                            Object.values(country?.translations).some((translations: any) => {
+                                return Object.values(translations).some((translationsValues: any)=>{
+                                    return translationsValues.toLowerCase().includes(searchByName.toLowerCase())
+                                } )})) {
                             return country
                         }
                     }).map((country: any, index: any) => {
@@ -119,7 +124,9 @@ export default function Home() {
 
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                                 {/* <Grow in={!isLoading}> */}
+                                <div onClick={(e:any)=>{console.log(country)}}>
                                 <CountrieCard countrie={country} />
+                                </div>
                                 {/* </Grow> */}
                             </Grid >
                         )

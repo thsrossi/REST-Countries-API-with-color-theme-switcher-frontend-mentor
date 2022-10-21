@@ -12,7 +12,7 @@ interface Props{
 
 export function CountrieCard({countrie}: Props){
     return(
-    <Card sx={{ width: '255.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0}}>
+    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0}}>
       <CardActionArea sx={{ paddingBottom: 3 }}>
         <CardMedia
           component="img"

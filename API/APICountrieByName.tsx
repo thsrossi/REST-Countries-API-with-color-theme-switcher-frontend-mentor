@@ -7,5 +7,5 @@ export default async function getCountryByName(countryName: string){
     ).then((result) => {
         retorno = result
 })
-    return retorno
+    return retorno[0]
 }

@@ -3,6 +3,7 @@ import React from "react";
 import Container from '@mui/material/Container';
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import {styled} from '@mui/material/styles'
+import { useNavigate } from "react-router-dom";
 
 interface Props{
     toggleTheme(): void;
@@ -17,10 +18,11 @@ const StyledToolBar = styled(Toolbar)(({theme})=>({
 }))
 
 export function Header({toggleTheme}: Props){
+    const navigate = useNavigate();
     return(
         <StyledAppBar position="static">
             <StyledToolBar>
-            <h2 >
+            <h2 onClick={()=>navigate("/")} style={{cursor: 'pointer'}}>
                 Where in the world?
             </h2>
             <Button 

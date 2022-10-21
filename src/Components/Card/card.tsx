@@ -26,9 +26,9 @@ export function CountrieCard({countrie}: Props){
             {countrie?.name.common}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Population: {countrie.population.toLocaleString('pt-BR')} <br/>
-            Region: {countrie.region} <br/>
-            {countrie.capital ? `Capital: ${countrie.capital}`: ''} <br/>
+            Population: <Typography variant="body2" component="span">{countrie.population.toLocaleString('pt-BR')}</Typography> <br/>
+            Region: <Typography variant="body2" component="span">{countrie.region}</Typography> <br/>
+            {countrie.capital ? "Capital: " + <Typography variant="body2" component="span"> ${countrie?.region} </Typography> : ''} <br/>
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -82,7 +82,7 @@ export function Details() {
                         src={country?.flags?.png}
                     />
                     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} width={{xs:'100%', md:'61%'}} ml={{xs: 0, md:13}}>
-                        <Typography variant={"h5"} fontWeight={700} my={2}>{country?.name?.common}</Typography>
+                        <Typography variant={"h5"} fontWeight={700} mb={2} mt={{xs: 2, md:0}}>{country?.name?.common}</Typography>
                         <Stack flexDirection={{xs:'column', md:'row'}} display={'flex'} flexWrap={{xs: 'wrap', md:'nowrap'}} justifyContent={'space-between'}>
                             
                             

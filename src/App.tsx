@@ -40,7 +40,8 @@ function App() {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
-        maxWidth: '100%'
+        maxWidth: '100%',
+        fontWeight: 600
       },
       body1:{
         color: theme.colors.primary,

@@ -12,15 +12,15 @@ interface Props {
 
 export function CountrieCard({ countrie }: Props) {
   return (
-    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0 }}>
-      <CardActionArea sx={{ paddingBottom: 1 }}>
+    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0, boxShadow:'1px 1px 10px 3px rgba(0,0,0,0.12)' }} elevation={0}>
+      <CardActionArea sx={{ paddingBottom: 1, height: '350px' }}>
         <CardMedia
           component="img"
           height="170"
           image={countrie?.flags.png}
           alt={countrie?.name.common + " flag"}
         />
-        <CardContent>
+        <CardContent sx={{height: '100%'}}>
           <Typography gutterBottom variant="h6" component="div"
           >
             {countrie?.name.common}

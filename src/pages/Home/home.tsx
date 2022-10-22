@@ -16,8 +16,37 @@ export default function Home() {
     const [filters, setFilters] = useState("")
     const [isLoading, setIsLoading] = useState(true)
     const [searchByName, setSearchByName] = useState("")
+    
+    //vars to InfiniteScroll
+    const [pageHeight, setPageHeight] = useState(0);
+    const [scroll, setScroll] = useState(0);
+    const [wait, setWait] = useState(false);
+    const [limit, setLimit] = useState(20)
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        function infiniteScroll(event: any) {
+          setScroll(window.scrollY);
+          let auxiliar: any = document?.scrollingElement?.scrollHeight;
+          setPageHeight(auxiliar - document.body.offsetHeight);
+    
+          if (scroll >= pageHeight * 0.8 && wait === false) {
+            setLimit(limit + 20);
+            setWait(true);
+            setTimeout(() => {
+              setWait(false);
+            }, 300);
+          }
+        }
+    
+        window.addEventListener("wheel", infiniteScroll);
+        window.addEventListener("scroll", infiniteScroll);
+        return () => {
+          window.removeEventListener("wheel", infiniteScroll);
+          window.removeEventListener("scroll", infiniteScroll);
+        };
+      }, [scroll]);
 
     async function getCountries() {
         setIsLoading(true);
@@ -31,7 +60,8 @@ export default function Home() {
     };
 
     useEffect(() => {
-        getCountries()
+        getCountries();
+        setLimit(20)
     }, [filters]);
 
     const optionsRegion = [
@@ -129,7 +159,7 @@ export default function Home() {
                                 {/* </Grow> */}
                             </Grid >
                         )
-                    })?.slice(0, 20)
+                    })?.slice(0, limit)
                 }
 
             </Grid>

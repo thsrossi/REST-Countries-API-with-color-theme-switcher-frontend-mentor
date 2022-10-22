@@ -4,9 +4,12 @@ import Container from '@mui/material/Container';
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import {styled} from '@mui/material/styles'
 import { useNavigate } from "react-router-dom";
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 interface Props{
     toggleTheme(): void;
+    theme: string;
 }
 
 const StyledAppBar = styled(AppBar)(({theme})=>({
@@ -17,7 +20,7 @@ const StyledToolBar = styled(Toolbar)(({theme})=>({
     justifyContent:'space-between'
 }))
 
-export function Header({toggleTheme}: Props){
+export function Header({toggleTheme, theme}: Props){
     const navigate = useNavigate();
     return(
         <StyledAppBar position="static">
@@ -26,9 +29,10 @@ export function Header({toggleTheme}: Props){
                 Where in the world?
             </h2>
             <Button 
+                startIcon={theme == 'dark' ? <DarkModeOutlinedIcon/> : <LightbulbOutlinedIcon/>}
                 onClick={toggleTheme}
             >
-                Dark Mode
+                {theme == 'dark' ? 'Light' : 'Dark'} Mode
             </Button>
             </StyledToolBar>
             

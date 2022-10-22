@@ -67,7 +67,7 @@ export default function Home() {
                         labelId="select-label-filter"
                         id="select"
                         value={filters}
-                        label="Filter By Region"
+                        label="Filter by Region"
                         onChange={(e:any)=>{setFilters(e.target.value)}}
                         autoWidth
                         inputProps={{ 'aria-label': 'Without label' }}
@@ -79,15 +79,6 @@ export default function Home() {
                     })}
                     </Select>
                 </SelectRegion>
-
-                {/* <select placeholder="">
-                    <option value="" disabled selected>Filter By Region</option>
-                    {optionsRegion.map((option: any, index: number) => {
-                        return (
-                            <option key={index} value={option.value}>{option.label}</option>
-                        )
-                    })}
-                </select> */}
             </Row>
 
             <Grid

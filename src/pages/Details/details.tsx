@@ -56,7 +56,7 @@ export function Details() {
     return (
         <>
             
-        <Container sx={{mt:{xs: 4, md: 8}}}>
+        <Container sx={{mt:{xs: 4, md: 6}}}>
             <Button 
             variant="outlined" 
             startIcon={<ArrowBackOutlinedIcon />}
@@ -66,7 +66,7 @@ export function Details() {
             </Button>
         </Container>
 
-        <Container sx={{py:{xs: 4, md: 8}}}>
+        <Container sx={{py:{xs: 4, md: 6}}}>
             
             {isLoading ? <Skeleton /> :
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'} flexWrap={{xs: 'wrap', md:'nowrap'}}>
@@ -75,8 +75,6 @@ export function Details() {
                         sx={{
                             height: 'auto',
                             width: {xs: '100%', sm:'90%', md: '39%'},
-                            // maxHeight: { xs: 233, md: 167 },
-                            // maxWidth: { xs: 350, md: 250 },
                             mr:{xs: 0, md: 0},
                             mx:{sm: '10%', md: 0}
                         }}
@@ -89,20 +87,20 @@ export function Details() {
                             
                             
                                 <Stack maxWidth={{xs: '100%', md: '45%'}}>
-                                <Typography>Native Name: <Typography component={'span'}>{country?.name?.official}</Typography></Typography>
-                                <Typography>Population: <Typography component={'span'}>{country?.population?.toLocaleString('pt-BR')}</Typography></Typography>
-                                <Typography>Region: <Typography component={'span'}>{country?.region}</Typography></Typography>
-                                <Typography>Sub Region: <Typography component={'span'}>{country?.subregion}</Typography></Typography>
-                                <Typography>Capital: <Typography component={'span'}>{convertArray(country?.capital)}</Typography></Typography>
+                                <Typography pb={0.5}>Native Name: <Typography variant="body2" component={'span'}>{country?.name?.official}</Typography></Typography>
+                                <Typography pb={0.5}>Population: <Typography variant="body2" component={'span'}>{country?.population?.toLocaleString('pt-BR')}</Typography></Typography>
+                                <Typography pb={0.5}>Region: <Typography variant="body2" component={'span'}>{country?.region}</Typography></Typography>
+                                <Typography pb={0.5}>Sub Region: <Typography variant="body2" component={'span'}>{country?.subregion}</Typography></Typography>
+                                <Typography pb={0.5}>Capital: <Typography variant="body2" component={'span'}>{convertArray(country?.capital)}</Typography></Typography>
                                 </Stack>
                   
                                 <Stack maxWidth={{xs: '100%', md: '45%'}}>
-                                <Typography>Top Level Domain: <Typography component={'span'}>{country?.tld}</Typography></Typography>
-                                <Typography>Currencies: <Typography component={'span'}>
+                                <Typography pb={0.5}>Top Level Domain: <Typography variant="body2" component={'span'}>{country?.tld}</Typography></Typography>
+                                <Typography pb={0.5}>Currencies: <Typography variant="body2" component={'span'}>
                                         {convertArray(country.currencies, 'name', true)}
                                     </Typography>
                                 </Typography>
-                                <Typography>Languages: <Typography component={'span'}>{convertArray(country?.languages)}</Typography></Typography>
+                                <Typography pb={0.5}>Languages: <Typography variant="body2" component={'span'}>{convertArray(country?.languages)}</Typography></Typography>
                                 </Stack>
                           
                         </Stack>

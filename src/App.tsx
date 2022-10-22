@@ -26,6 +26,12 @@ function App() {
         dark: theme.colors.primary,
         light: theme.colors.primary,
         contrastText: theme.colors.primary
+      },
+      secondary: {
+        main: theme?.colors?.secondary,
+        dark: theme?.colors?.secondary,
+        light: theme?.colors?.secondary,
+        contrastText: theme?.colors?.secondary
       }
     },
     typography: {
@@ -35,6 +41,15 @@ function App() {
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         maxWidth: '100%'
+      },
+      body1:{
+        color: theme.colors.primary,
+        fontWeight: 600
+      },
+      body2:{
+        color: theme.colors.secondary,
+        fontWeight: 300,
+        fontSize: '1rem'
       }
     }
   })
@@ -48,7 +63,7 @@ function App() {
       <ThemeProvider theme={theme}>
           <GlobalStyle />
           <MuiTheme theme={themeMui}>
-            <Header toggleTheme={toggleTheme} />
+            <Header toggleTheme={toggleTheme} theme={theme.title}/>
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/details/:id" element={<Details/>}/>

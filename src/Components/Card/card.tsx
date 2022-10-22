@@ -6,14 +6,14 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 
-interface Props{
-    countrie: any
+interface Props {
+  countrie: any
 }
 
-export function CountrieCard({countrie}: Props){
-    return(
-    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0}}>
-      <CardActionArea sx={{ paddingBottom: 3 }}>
+export function CountrieCard({ countrie }: Props) {
+  return (
+    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0 }}>
+      <CardActionArea sx={{ paddingBottom: 1 }}>
         <CardMedia
           component="img"
           height="170"
@@ -25,13 +25,16 @@ export function CountrieCard({countrie}: Props){
           >
             {countrie?.name.common}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Population: <Typography variant="body2" component="span">{countrie.population.toLocaleString('pt-BR')}</Typography> <br/>
-            Region: <Typography variant="body2" component="span">{countrie.region}</Typography> <br/>
-            {countrie.capital ? "Capital: " + <Typography variant="body2" component="span"> ${countrie?.region} </Typography> : ''} <br/>
+          <Typography>
+            Population: <Typography variant="body2" component="span">
+              {countrie.population.toLocaleString('pt-BR')}</Typography> <br />
+            Region: <Typography variant="body2" component="span">{countrie.region}</Typography> <br />
+            {countrie.capital && <Typography>Capital: <Typography variant="body2" component="span">
+              {countrie?.capital} </Typography>
+            </Typography>}<br />
           </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
-    )
+  )
 }

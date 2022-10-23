@@ -9,6 +9,7 @@ import { Container, FormControl, Grow, InputAdornment, InputLabel, MenuItem, Out
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { SearchInput, SelectRegion } from "../../Components/styledMUI";
 import { useNavigate } from "react-router-dom";
+import FadeIn from "react-fade-in";
 
 
 export default function Home() {
@@ -110,11 +111,12 @@ export default function Home() {
                     </Select>
                 </SelectRegion>
             </Row>
-
+            
             <Grid
                 container spacing={7}
                 sx={{ zIndex: 0, paddingBottom: '30px' }}
             >
+                
                 {isLoading ?
                     [...Array(12)].map((e: any, index: any) => {
                         return (
@@ -153,17 +155,19 @@ export default function Home() {
 
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                                 {/* <Grow in={!isLoading}> */}
+                                <FadeIn>
                                 <div onClick={() => navigate(`/details/${country?.name.common}`)}>
+
                                 <CountrieCard countrie={country} />
                                 </div>
+                                </FadeIn>
                                 {/* </Grow> */}
                             </Grid >
                         )
                     })?.slice(0, limit)
                 }
-
+            
             </Grid>
-
         </Container >
     )
 }

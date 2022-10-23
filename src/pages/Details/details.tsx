@@ -3,6 +3,7 @@ import { Stack } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import getCountryByName from "../../../API/APICountrieByName"
+import getCountryByCode from "../../../API/APICountryByCode"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 
@@ -10,13 +11,16 @@ export function Details() {
     const params: any = useParams()
     const [country, setCountry] = useState<any>({})
     const [isLoading, setIsLoading] = useState(true)
-    const navigate= useNavigate()
+    const navigate= useNavigate();
+    const [borders, setBorders] = useState([])
+
     // const currencies = Object.values(country.currencies)
 
     function convertArray(array: any, propName?: any, searchByPropName?: boolean): any | undefined {
         let converted: any = ''
-        array = Object?.values(array)
-        if (array.length > 0) {
+        
+        if (array != undefined) {
+            array = Object?.values(array)
             console.log(array)
             console.log(array)
             converted = array?.map((element: any, index: any) => {
@@ -40,16 +44,26 @@ export function Details() {
     async function getCountry() {
         setIsLoading(true);
         setCountry(await getCountryByName(params?.id))
-        setIsLoading(false)
     };
 
     useEffect(() => {
         getCountry()
-    }, [])
+    }, [params])
 
-    // useEffect(() => {
-    //     convertArray(country?.currencies, 'name')
-    // }, [country])
+    async function getCountryBorders(){
+        if (country?.borders){
+            setBorders(await getCountryByCode(country?.borders))
+
+        }
+            setIsLoading(false)
+    }
+
+    useEffect(() => {
+        if(Object.keys(country).length != 0){
+            console.log(country)
+            getCountryBorders()
+        }
+    }, [country])
 
     console.log(country)
 
@@ -104,6 +118,16 @@ export function Details() {
                                 </Stack>
                           
                         </Stack>
+                        {borders.length != 0 &&
+                        <Box mt={5} >
+                        <Typography component={'span'}>Border Countries: </Typography>
+                        <Box>
+                        {borders?.map((border: any)=>{
+                            return <Button size={'small'} sx={{mr:1, mt:1}} variant="outlined" onClick={() => navigate(`/details/${border}`)}>{border}</Button>
+                        })}
+                        </Box>
+                        </Box>
+                        }
                     </Box>
                 </Box>
             }

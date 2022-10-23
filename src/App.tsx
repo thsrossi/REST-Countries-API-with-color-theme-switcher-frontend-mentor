@@ -51,6 +51,9 @@ function App() {
         color: theme.colors.secondary,
         fontWeight: 300,
         fontSize: '1rem'
+      },
+      button: {
+        textTransform: 'none'
       }
     }
   })

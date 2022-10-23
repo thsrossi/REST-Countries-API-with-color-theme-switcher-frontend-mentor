@@ -37,7 +37,7 @@ export default function Home() {
             setWait(true);
             setTimeout(() => {
               setWait(false);
-            }, 300);
+            }, 500);
           }
         }
     
@@ -154,13 +154,15 @@ export default function Home() {
                         // let delay = 0;
 
                         // delay = delay + 50;
-                        const delay = index > 20 ? Math.trunc(index / 20)*100  : index * 100
+                        const delay = index >= 20 ? Math.floor(index % 20)*75  : index * 75
                         return (
                             
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                                 {/* <Grow in={!isLoading}> */}
                                 <FadeIn delay={delay}>
-                                <div onClick={() => navigate(`/details/${country?.name.common}`)}>
+                                <div onClick={() => {
+                                    navigate(`/details/${country?.name.common}`)
+                                    }}>
 
                                 <CountrieCard countrie={country} />
                                 </div>

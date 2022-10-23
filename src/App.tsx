@@ -15,6 +15,7 @@ function App() {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light)
 
   const themeMui = createTheme({
+    
     palette: {
       mode: theme?.title == 'light' ? 'light' : 'dark',
       background: {
@@ -57,6 +58,12 @@ function App() {
       }
     }
   })
+
+  themeMui.typography.h2 = {
+    [themeMui.breakpoints.only('xs')]:{
+      fontSize:'0.8125rem'
+  }
+  }
 
   const toggleTheme = () => {
     setTheme(theme.title === 'light' ? dark : light);

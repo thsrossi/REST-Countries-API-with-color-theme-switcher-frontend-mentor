@@ -14,4 +14,6 @@ export default createGlobalStyle `
         color: ${props => props.theme.colors.primary};
         font-family: 'Nunito Sans', sans-serif!important;
     }
+
+    
 `

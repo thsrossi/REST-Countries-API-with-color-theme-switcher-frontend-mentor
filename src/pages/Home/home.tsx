@@ -7,7 +7,7 @@ import getCountriesByRegion from "../../../API/APICountriesByRegion"
 import { CountrieCard } from "../../Components/Card/card";
 import { Container, FormControl, Grow, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Skeleton, Stack, Typography } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { SearchInput, SelectRegion } from "../../Components/styledMUI";
+import { SearchInput, SelectRegion, StyledSelect } from "../../Components/styledMUI";
 import { useNavigate } from "react-router-dom";
 import FadeIn from "react-fade-in";
 
@@ -86,15 +86,15 @@ export default function Home() {
                     sx={{width:'50%'}}
                     placeholder="Search for a country..."
                     startAdornment={
-                        <InputAdornment position="start">
-                            <SearchOutlinedIcon />
+                        <InputAdornment sx={{px:2}}position="start">
+                            <SearchOutlinedIcon/>
                         </InputAdornment>
                     }
                 />
 
                 <SelectRegion sx={{minWidth:'180px'}}>
                     <InputLabel id="select-label-filter" htmlFor="select">Filter By Region</InputLabel>
-                    <Select
+                    <StyledSelect
                         labelId="select-label-filter"
                         id="select"
                         value={filters}
@@ -108,7 +108,7 @@ export default function Home() {
                             <MenuItem sx={{minWidth:'180px'}} key={index} value={option.value}>{option.label}</MenuItem>
                         )
                     })}
-                    </Select>
+                    </StyledSelect>
                 </SelectRegion>
             </Row>
             
@@ -151,11 +151,15 @@ export default function Home() {
                             return country
                         }
                     }).map((country: any, index: any) => {
-                        return (
+                        // let delay = 0;
 
+                        // delay = delay + 50;
+                        const delay = index > 20 ? Math.trunc(index / 20)*100  : index * 100
+                        return (
+                            
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                                 {/* <Grow in={!isLoading}> */}
-                                <FadeIn>
+                                <FadeIn delay={delay}>
                                 <div onClick={() => navigate(`/details/${country?.name.common}`)}>
 
                                 <CountrieCard countrie={country} />

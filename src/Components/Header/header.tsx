@@ -1,15 +1,16 @@
 import React from "react";
 // import { Container } from "./style";
 import Container from '@mui/material/Container';
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import {styled} from '@mui/material/styles'
 import { useNavigate } from "react-router-dom";
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 interface Props{
     toggleTheme(): void;
     theme: string;
+    
 }
 
 const StyledAppBar = styled(AppBar)(({theme})=>({
@@ -21,16 +22,20 @@ const StyledToolBar = styled(Toolbar)(({theme})=>({
 }))
 
 export function Header({toggleTheme, theme}: Props){
+
+    const isSmallScreen = useMediaQuery((themeMui:any) => themeMui.breakpoints.down("sm"));
+
     const navigate = useNavigate();
     return(
         <StyledAppBar position="static">
             <StyledToolBar>
-            <h2 onClick={()=>navigate("/")} style={{cursor: 'pointer'}}>
+            <Typography variant='h2'  onClick={()=>navigate("/")} style={{cursor: 'pointer'}}>
                 Where in the world?
-            </h2>
+            </Typography>
             <Button 
-                startIcon={theme == 'dark' ? <DarkModeOutlinedIcon/> : <LightbulbOutlinedIcon/>}
+                startIcon={theme == 'dark' ? <LightbulbIcon/> : <DarkModeIcon/>}
                 onClick={toggleTheme}
+                size={isSmallScreen ? 'small' : 'medium'}
             >
                 {theme == 'dark' ? 'Light' : 'Dark'} Mode
             </Button>

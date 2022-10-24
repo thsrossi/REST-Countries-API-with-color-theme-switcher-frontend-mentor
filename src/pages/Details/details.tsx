@@ -8,13 +8,15 @@ import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {SkeletonDetails} from '../../Components/SkeletonDetails/SkeletonDetails';
 import FadeIn from 'react-fade-in';
 import notFound from '../../assets/images/notfound.svg'
+import { Head } from "../../Components/HeadHTML";
+import { Countries } from '../../types/countriesModel';
 
 export function Details() {
     const params: any = useParams()
-    const [country, setCountry] = useState<any>({})
+    const [country, setCountry] = useState<Countries | undefined>(undefined)
     const [isLoading, setIsLoading] = useState(true)
     const navigate= useNavigate();
-    const [borders, setBorders] = useState([])
+    const [borders, setBorders] = useState<Array<string> | Array<undefined>>([])
 
     // const currencies = Object.values(country.currencies)
 
@@ -23,10 +25,7 @@ export function Details() {
         
         if (array != undefined) {
             array = Object?.values(array)
-            console.log(array)
-            console.log(array)
             converted = array?.map((element: any, index: any) => {
-                console.log(element[propName])
                 if(searchByPropName){
                     return (
                     `${element[propName]}${(array.length - 1 != index) ? ", " : '' }`
@@ -39,7 +38,6 @@ export function Details() {
                 }
             })
         }
-        console.log(converted)
         return converted
     }
 
@@ -63,16 +61,16 @@ export function Details() {
     useEffect(() => {
         if(country != undefined){
         if(Object.keys(country).length != 0){
-            console.log(country)
             getCountryBorders()
         }}
     }, [country])
 
-    console.log(country)
-
     return (
         <>
-            
+        <Head 
+        title={params.id + ' Details'} 
+        description={"Get " + params.id + " details like native name, population, region, sub region, capital, top level domain, languages, border countries"}
+        />
         <Container sx={{mt:{xs: 4, md: 6}}}>
             <Button 
             variant="outlined" 

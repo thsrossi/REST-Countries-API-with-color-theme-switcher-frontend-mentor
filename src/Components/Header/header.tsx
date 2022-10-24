@@ -6,6 +6,7 @@ import {styled} from '@mui/material/styles'
 import { useNavigate } from "react-router-dom";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { HeaderTitle } from "../styledMUI";
 
 interface Props{
     toggleTheme(): void;
@@ -29,9 +30,9 @@ export function Header({toggleTheme, theme}: Props){
     return(
         <StyledAppBar position="static">
             <StyledToolBar>
-            <Typography variant='h2'  onClick={()=>navigate("/")} style={{cursor: 'pointer'}}>
+            <HeaderTitle variant='h2'  onClick={()=>navigate("/")} style={{cursor: 'pointer'}}>
                 Where in the world?
-            </Typography>
+            </HeaderTitle>
             <Button 
                 startIcon={theme == 'dark' ? <LightbulbIcon/> : <DarkModeIcon/>}
                 onClick={toggleTheme}

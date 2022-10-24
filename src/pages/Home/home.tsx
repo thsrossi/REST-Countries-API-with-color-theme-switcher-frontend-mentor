@@ -10,14 +10,16 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { SearchInput, SelectRegion, StyledSelect } from "../../Components/styledMUI";
 import { useNavigate } from "react-router-dom";
 import FadeIn from "react-fade-in";
+import { Head } from "../../Components/HeadHTML";
+import { Countries, Translation } from "../../types/countriesModel";
 
 
 export default function Home() {
-    const [countries, setCountries] = useState<any>([])
+    const [countries, setCountries] = useState<Array<Countries | Array<undefined>>([])
     const [filters, setFilters] = useState("")
     const [isLoading, setIsLoading] = useState(true)
     const [searchByName, setSearchByName] = useState("")
-    
+    console.log(countries)
     //vars to InfiniteScroll
     const [pageHeight, setPageHeight] = useState(0);
     const [scroll, setScroll] = useState(0);
@@ -76,7 +78,7 @@ export default function Home() {
 
     return (
         <Container >
-
+            <Head title={'RestCountries'} description={'Get Countries informations, like population, region, capital'}/>
             <Row>
 
                 <SearchInput
@@ -135,26 +137,26 @@ export default function Home() {
                         )
                     })
                     :
-                    countries?.filter((country: any) => {
+                    countries.filter((country: Countries | Array<undefined>) => {
                         if (searchByName == "") {
                             return country
                         } else if (country?.altSpellings?.some((element: any, index: number) => {
                             return element?.toLowerCase().includes(searchByName.toLowerCase())
-                        }) || country?.name.common.toLowerCase().includes(searchByName.toLowerCase()) || 
-                            Object.values(country?.translations).some((translations: any) => {
+                        }) || country?.name?.common?.toLowerCase().includes(searchByName.toLowerCase()) || 
+                            Object?.values(country.translations).some((translations: boolean) => {
                                 return Object.values(translations).some((translationsValues: any)=>{
                                     return translationsValues.toLowerCase().includes(searchByName.toLowerCase())
                                 } )})) {
                             return country
                         }
-                    }).map((country: any, index: any) => {
+                    })?.map((country: Countries | undefined, index: any) => {
                         const delay = index >= 20 ? Math.floor(index % 20)*85  : index * 85
                         return (
                             
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
                                 <FadeIn delay={delay}>
                                 <div onClick={() => {
-                                    navigate(`/details/${country?.name.common}`)
+                                    navigate(`/details/${country?.name?.common}`)
                                     }}>
 
                                 <CountrieCard countrie={country} />
@@ -166,6 +168,7 @@ export default function Home() {
                 }
             
             </Grid>
+            
         </Container >
     )
 }

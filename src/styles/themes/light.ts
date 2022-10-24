@@ -6,6 +6,7 @@ export default{
         secondary: '#202020',
         
         background: '#fafafa',
-        backgroundSecondary: '#fff'
+        backgroundSecondary: '#fff',
+        linkColor: '#536dfe'
     }
 }

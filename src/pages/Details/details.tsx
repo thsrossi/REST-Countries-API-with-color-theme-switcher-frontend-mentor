@@ -1,13 +1,13 @@
 import { Box, Button, Container, Grid, Skeleton, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import getCountryByName from "../../../API/APICountrieByName"
 import getCountryByCode from "../../../API/APICountryByCode"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {SkeletonDetails} from '../../Components/SkeletonDetails/SkeletonDetails';
 import FadeIn from 'react-fade-in';
-
+import notFound from '../../assets/images/notfound.svg'
 
 export function Details() {
     const params: any = useParams()
@@ -61,10 +61,11 @@ export function Details() {
     }
 
     useEffect(() => {
+        if(country != undefined){
         if(Object.keys(country).length != 0){
             console.log(country)
             getCountryBorders()
-        }
+        }}
     }, [country])
 
     console.log(country)
@@ -81,9 +82,9 @@ export function Details() {
                 Back
             </Button>
         </Container>
-
+        {country != undefined ? 
         <Container sx={{py:{xs: 4, md: 6}}}>
-            
+        
             {isLoading ? <SkeletonDetails/> :
             <FadeIn>
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'} flexWrap={{xs: 'wrap', md:'nowrap'}}>
@@ -137,7 +138,16 @@ export function Details() {
                 </Box>
             </FadeIn>
             }
+            
+           
         </Container>
+        : <Container sx={{py:{xs: 4, md: 6}}}>
+            <Box display={'flex'} justifyContent={'center'} flexDirection={'column'}>
+            <Box mx={'auto'} width={{xs: '90%', md: '35%'}} mb={6} component="img" src={notFound}/>
+            <Typography mx={'auto'}>Selected Country not found, <Link to={'/'}>Go Back Home</Link> or try again in a few minutes later.</Typography>
+            </Box>
+        </Container>
+        }
         </>
     )
 }

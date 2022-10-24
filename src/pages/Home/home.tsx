@@ -5,7 +5,7 @@ import getAllCountries from "../../../API/APIGlobal"
 import getCountriesByRegion from "../../../API/APICountriesByRegion"
 
 import { CountrieCard } from "../../Components/Card/card";
-import { Container, FormControl, Grow, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Skeleton, Stack, Typography } from "@mui/material";
+import { Container, InputAdornment, InputLabel, MenuItem, Skeleton, Stack, Typography } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { SearchInput, SelectRegion, StyledSelect } from "../../Components/styledMUI";
 import { useNavigate } from "react-router-dom";

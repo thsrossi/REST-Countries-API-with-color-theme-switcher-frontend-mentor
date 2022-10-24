@@ -13,7 +13,13 @@ export default createGlobalStyle `
         font-size: 16px;
         color: ${props => props.theme.colors.primary};
         font-family: 'Nunito Sans', sans-serif!important;
+
+        a{
+            color: ${props => props.theme.colors.linkColor}
+        }
+    
     }
+
 
     
 `

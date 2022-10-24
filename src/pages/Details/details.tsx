@@ -6,6 +6,7 @@ import getCountryByName from "../../../API/APICountrieByName"
 import getCountryByCode from "../../../API/APICountryByCode"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {SkeletonDetails} from '../../Components/SkeletonDetails/SkeletonDetails';
+import FadeIn from 'react-fade-in';
 
 
 export function Details() {
@@ -84,7 +85,9 @@ export function Details() {
         <Container sx={{py:{xs: 4, md: 6}}}>
             
             {isLoading ? <SkeletonDetails/> :
+            <FadeIn>
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'} flexWrap={{xs: 'wrap', md:'nowrap'}}>
+                    
                     <Box
                         component="img"
                         sx={{
@@ -130,7 +133,9 @@ export function Details() {
                         </Box>
                         }
                     </Box>
+                    
                 </Box>
+            </FadeIn>
             }
         </Container>
         </>

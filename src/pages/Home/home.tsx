@@ -111,12 +111,10 @@ export default function Home() {
                     </StyledSelect>
                 </SelectRegion>
             </Row>
-            
             <Grid
                 container spacing={7}
                 sx={{ zIndex: 0, paddingBottom: '30px' }}
             >
-                
                 {isLoading ?
                     [...Array(12)].map((e: any, index: any) => {
                         return (
@@ -136,7 +134,6 @@ export default function Home() {
                             </Grid>
                         )
                     })
-
                     :
                     countries?.filter((country: any) => {
                         if (searchByName == "") {
@@ -151,14 +148,10 @@ export default function Home() {
                             return country
                         }
                     }).map((country: any, index: any) => {
-                        // let delay = 0;
-
-                        // delay = delay + 50;
-                        const delay = index >= 20 ? Math.floor(index % 20)*75  : index * 75
+                        const delay = index >= 20 ? Math.floor(index % 20)*85  : index * 85
                         return (
                             
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} justifyContent={'center'}>
-                                {/* <Grow in={!isLoading}> */}
                                 <FadeIn delay={delay}>
                                 <div onClick={() => {
                                     navigate(`/details/${country?.name.common}`)
@@ -167,7 +160,6 @@ export default function Home() {
                                 <CountrieCard countrie={country} />
                                 </div>
                                 </FadeIn>
-                                {/* </Grow> */}
                             </Grid >
                         )
                     })?.slice(0, limit)

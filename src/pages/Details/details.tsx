@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import getCountryByName from "../../../API/APICountrieByName"
 import getCountryByCode from "../../../API/APICountryByCode"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import {SkeletonDetails} from '../../Components/SkeletonDetails/SkeletonDetails';
 
 
 export function Details() {
@@ -82,7 +83,7 @@ export function Details() {
 
         <Container sx={{py:{xs: 4, md: 6}}}>
             
-            {isLoading ? <Skeleton /> :
+            {isLoading ? <SkeletonDetails/> :
                 <Box display={'flex'} flexDirection={'row'} alignItems={'center'} flexWrap={{xs: 'wrap', md:'nowrap'}}>
                     <Box
                         component="img"
@@ -123,7 +124,7 @@ export function Details() {
                         <Typography component={'span'}>Border Countries: </Typography>
                         <Box>
                         {borders?.map((border: any)=>{
-                            return <Button size={'small'} sx={{mr:1, mt:1}} variant="outlined" onClick={() => navigate(`/details/${border}`)}>{border}</Button>
+                            return <Button key={border} size={'small'} sx={{mr:1, mt:1}} variant="outlined" onClick={() => navigate(`/details/${border}`)}>{border}</Button>
                         })}
                         </Box>
                         </Box>

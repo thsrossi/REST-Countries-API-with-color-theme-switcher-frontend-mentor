@@ -12,7 +12,7 @@ interface Props {
 
 export function CountrieCard({ countrie }: Props) {
   return (
-    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0, boxShadow:'1px 1px 10px 3px rgba(0,0,0,0.12)' }} elevation={0}>
+    <Card sx={{ width: '240.4px', maxWidth: '100%', borderRadius: '6px', zIndex: 0, boxShadow: '1px 1px 10px 3px rgba(0,0,0,0.12)' }} elevation={0}>
       <CardActionArea sx={{ paddingBottom: 1, height: '350px' }}>
         <CardMedia
           component="img"
@@ -20,8 +20,8 @@ export function CountrieCard({ countrie }: Props) {
           image={countrie?.flags.png}
           alt={countrie?.name.common + " flag"}
         />
-        <CardContent sx={{height: '100%'}}>
-          <Typography gutterBottom variant="h6" component="div"
+        <CardContent sx={{ height: '100%' }}>
+          <Typography gutterBottom variant="h6"
           >
             {countrie?.name.common}
           </Typography>
@@ -29,9 +29,15 @@ export function CountrieCard({ countrie }: Props) {
             Population: <Typography variant="body2" component="span">
               {countrie.population.toLocaleString('pt-BR')}</Typography> <br />
             Region: <Typography variant="body2" component="span">{countrie.region}</Typography> <br />
-            {countrie.capital && <Typography>Capital: <Typography variant="body2" component="span">
-              {countrie?.capital} </Typography>
-            </Typography>}<br />
+            {countrie.capital &&
+              <>
+                <Typography component="span">Capital: </Typography>
+                <Typography variant="body2" component="span">
+                  {countrie?.capital}
+                </Typography>
+                <br />
+              </>
+            }
           </Typography>
         </CardContent>
       </CardActionArea>

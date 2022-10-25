@@ -1,7 +1,7 @@
 import { Box, Button, Container, Grid, Skeleton, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, Params, useNavigate, useParams } from 'react-router-dom';
 import getCountryByName from "../../../API/APICountrieByName"
 import getCountryByCode from "../../../API/APICountryByCode"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
@@ -12,7 +12,7 @@ import { Head } from "../../Components/HeadHTML";
 import { Countries } from '../../types/countriesModel';
 
 export function Details() {
-    const params: any = useParams()
+    const params = useParams<Params>();
     const [country, setCountry] = useState<Countries | undefined>(undefined);
     const [tryedSetCountry, setTryedSetCountry] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
@@ -21,21 +21,21 @@ export function Details() {
 
     // const currencies = Object.values(country.currencies)
 
-    function convertArray(array: any, propName?: any, searchByPropName?: boolean): any | undefined {
+    function convertArray(array: any, propName?: string, searchByPropName?: boolean): any | undefined {
         let converted: any = ''
-
         if (array != undefined) {
             array = Object?.values(array)
-            converted = array?.map((element: any, index: any) => {
+            converted = array?.map((element: any, index: number) => {
+                
                 if (searchByPropName) {
                     return (
-                        `${element[propName]}${(array.length - 1 != index) ? ", " : ''}`
+                        `${element[propName!]}${(array?.length - 1 != index) ? ", " : ''}`
 
                     )
                 }
                 else {
                     return (
-                        `${element}${(array.length - 1 != index) ? ", " : ''}`
+                        `${element}${(array?.length - 1 != index) ? ", " : ''}`
                     )
                 }
             })
@@ -45,7 +45,7 @@ export function Details() {
 
     async function getCountry() {
         setIsLoading(true);
-        setCountry(await getCountryByName(params?.id))
+        setCountry(await getCountryByName(params.id))
         setTryedSetCountry(true)
     };
 
@@ -65,12 +65,13 @@ export function Details() {
         if (country != undefined) {
             if (Object.keys(country).length != 0) {
                 getCountryBorders()
-            } 
-            else{
+            } else{
                 setIsLoading(false)
             }
-        } 
-    }, [country])
+        } else if(tryedSetCountry){
+            setIsLoading(false)
+        }
+    }, [country, tryedSetCountry])
 
     return (
         <>
@@ -134,7 +135,7 @@ export function Details() {
                                         <Box mt={5} >
                                             <Typography component={'span'}>Border Countries: </Typography>
                                             <Box>
-                                                {borders?.map((border: any) => {
+                                                {borders?.map((border: string | undefined) => {
                                                     return <Button key={border} size={'small'} sx={{ mr: 1, mt: 1 }} variant="outlined" onClick={() => navigate(`/details/${border}`)}>{border}</Button>
                                                 })}
                                             </Box>

@@ -5,7 +5,7 @@ import getAllCountries from "../../../API/APIGlobal"
 import getCountriesByRegion from "../../../API/APICountriesByRegion"
 
 import { CountrieCard } from "../../Components/Card/card";
-import { Container, InputAdornment, InputLabel, MenuItem, Skeleton, Stack, Typography } from "@mui/material";
+import { Container, InputAdornment, InputLabel, MenuItem, SelectChangeEvent, Skeleton, Stack, Typography } from "@mui/material";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { SearchInput, SelectRegion, StyledSelect } from "../../Components/styledMUI";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +13,15 @@ import FadeIn from "react-fade-in";
 import { Head } from "../../Components/HeadHTML";
 import { Countries, Translation } from "../../types/countriesModel";
 
+export interface Options {
+    label: string;
+    value: string;
+}
+
 
 export default function Home() {
     const [countries, setCountries] = useState<Array<Countries> | undefined>(undefined)
-    const [filters, setFilters] = useState("")
+    const [filters, setFilters] = useState<string | unknown>("")
     const [isLoading, setIsLoading] = useState(true)
     const [searchByName, setSearchByName] = useState("")
 
@@ -29,9 +34,9 @@ export default function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        function infiniteScroll(event: any) {
+        function infiniteScroll() {
           setScroll(window.scrollY);
-          let auxiliar: any = document?.scrollingElement?.scrollHeight;
+          let auxiliar: number = document.scrollingElement!.scrollHeight;
           setPageHeight(auxiliar - document.body.offsetHeight);
     
           if (scroll >= pageHeight * 0.8 && wait === false) {
@@ -67,7 +72,7 @@ export default function Home() {
         setLimit(20)
     }, [filters]);
 
-    const optionsRegion = [
+    const optionsRegion: Options[] = [
         { label: 'All', value: 'all' },
         { label: 'Africa', value: 'Africa' },
         { label: 'America', value: 'America' },
@@ -83,7 +88,7 @@ export default function Home() {
 
                 <SearchInput
                     
-                    onChange={(e: any) => { setSearchByName(e.target.value) }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => { setSearchByName(e.target.value) }}
                     value={searchByName}
                     sx={{width:'50%'}}
                     placeholder="Search for a country..."
@@ -101,11 +106,11 @@ export default function Home() {
                         id="select"
                         value={filters}
                         label="Filter by Region"
-                        onChange={(e:any)=>{setFilters(e.target.value)}}
+                        onChange={(e: SelectChangeEvent<unknown>)=>{setFilters(e.target.value)}}
                         autoWidth
                         inputProps={{ 'aria-label': 'Without label' }}
                     >
-                        {optionsRegion.map((option: any, index: number) => {
+                        {optionsRegion.map((option: Options, index: number) => {
                         return (
                             <MenuItem sx={{minWidth:'180px'}} key={index} value={option.value}>{option.label}</MenuItem>
                         )
@@ -118,7 +123,7 @@ export default function Home() {
                 sx={{ zIndex: 0, paddingBottom: '30px' }}
             >
                 {isLoading ?
-                    [...Array(12)].map((e: any, index: any) => {
+                    [...Array(12)].map((_e: any, index: number) => {
                         return (
                             <Grid key={index} item xs={12} sm={6} md={4} lg={3} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                 <Stack spacing={1} justifyContent={'center'} sx={{width:'255.4px' }}>
@@ -140,16 +145,16 @@ export default function Home() {
                     countries?.filter((country: Countries) => {
                         if (searchByName == "") {
                             return country
-                        } else if (country?.altSpellings?.some((element: any, index: number) => {
+                        } else if (country?.altSpellings?.some((element: string) => {
                             return element?.toLowerCase().includes(searchByName.toLowerCase())
                         }) || country?.name?.common?.toLowerCase().includes(searchByName.toLowerCase()) || 
                             Object?.values(country?.translations)?.some((translations: Translation) => {
-                                return Object.values(translations).some((translationsValues: any)=>{
+                                return Object.values(translations).some((translationsValues: string)=>{
                                     return translationsValues.toLowerCase().includes(searchByName.toLowerCase())
                                 } )})) {
                             return country
                         }
-                    })?.map((country: Countries | undefined, index: any) => {
+                    })?.map((country: Countries | undefined, index: number) => {
                         const delay = index >= 20 ? Math.floor(index % 20)*85  : index * 85
                         return (
                             

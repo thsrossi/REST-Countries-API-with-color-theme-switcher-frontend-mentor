@@ -1,6 +1,6 @@
 import { Countries } from "../src/types/countriesModel"
 
-export default async function getCountriesByRegion(region: string){
+export default async function getCountriesByRegion(region: string | unknown){
     let retorno: Countries | undefined = undefined
     await fetch(`https://restcountries.com/v3.1/region/${region}`).then(
         (response:any)=>{

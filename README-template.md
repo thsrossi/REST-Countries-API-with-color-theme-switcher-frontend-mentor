@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://restcountries-themeswitcher.netlify.app/)
+- Solution URL: [RestCountries With Theme Switcher](https://restcountries-themeswitcher.netlify.app/)
 
 ## My process
 
@@ -48,7 +48,7 @@ Users should be able to:
 - Material UI for grid and components
 - Mobile-first workflow
 - [Styled Components](https://styled-components.com/) - For styles and theme switcher
-- React Fade-In Component for fade-in animations(https://github.com/gkaemmer/react-fade-in#readme) 
+- [React Fade-In](https://github.com/gkaemmer/react-fade-in#readme) ) Component for fade-in animations
 
 ### What I learned
 
@@ -56,7 +56,7 @@ I deepened my knowledge of material ui and styled components.
 
 ### Useful resources
 
-- [Example resource 1](https://app.quicktype.io/) - This helped me to define types of API responses.
+- [Quicktype](https://app.quicktype.io/) - This helped me to define types of API responses.
 
 ## Author
 

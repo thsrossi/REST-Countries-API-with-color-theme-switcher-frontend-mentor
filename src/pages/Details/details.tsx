@@ -62,15 +62,14 @@ export function Details() {
     }
 
     useEffect(() => {
-        console.log(country)
-        console.log(isLoading)
         if (country != undefined) {
             if (Object.keys(country).length != 0) {
                 getCountryBorders()
             } 
-        } else{
-            setIsLoading(false)
-        }
+            else{
+                setIsLoading(false)
+            }
+        } 
     }, [country])
 
     return (

@@ -19,7 +19,7 @@ export default function Home() {
     const [filters, setFilters] = useState("")
     const [isLoading, setIsLoading] = useState(true)
     const [searchByName, setSearchByName] = useState("")
-    console.log(countries)
+
     //vars to InfiniteScroll
     const [pageHeight, setPageHeight] = useState(0);
     const [scroll, setScroll] = useState(0);

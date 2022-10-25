@@ -15,7 +15,7 @@ import { Countries, Translation } from "../../types/countriesModel";
 
 
 export default function Home() {
-    const [countries, setCountries] = useState<Array<Countries | Array<undefined>>([])
+    const [countries, setCountries] = useState<Array<Countries> | undefined>(undefined)
     const [filters, setFilters] = useState("")
     const [isLoading, setIsLoading] = useState(true)
     const [searchByName, setSearchByName] = useState("")
@@ -137,13 +137,13 @@ export default function Home() {
                         )
                     })
                     :
-                    countries.filter((country: Countries | Array<undefined>) => {
+                    countries?.filter((country: Countries) => {
                         if (searchByName == "") {
                             return country
                         } else if (country?.altSpellings?.some((element: any, index: number) => {
                             return element?.toLowerCase().includes(searchByName.toLowerCase())
                         }) || country?.name?.common?.toLowerCase().includes(searchByName.toLowerCase()) || 
-                            Object?.values(country.translations).some((translations: boolean) => {
+                            Object?.values(country?.translations)?.some((translations: Translation) => {
                                 return Object.values(translations).some((translationsValues: any)=>{
                                     return translationsValues.toLowerCase().includes(searchByName.toLowerCase())
                                 } )})) {

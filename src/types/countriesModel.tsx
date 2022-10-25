@@ -1,39 +1,39 @@
-export interface Countries extends Object {
-    name?:         Name;
-    tld?:          string[];
-    cca2?:         string;
-    ccn3?:         string;
-    cca3?:         string;
-    cioc?:         string;
-    independent?:  boolean;
-    status?:       Status;
-    unMember?:     boolean;
-    currencies?:   Currencies;
-    idd?:          Idd;
-    capital?:      string[];
-    altSpellings?: string[];
-    region?:       Region;
-    subregion?:    string;
-    languages?:    { [key: string]: string };
+export interface Countries {
+    name:         Name;
+    tld?:         string[];
+    cca2:         string;
+    ccn3?:        string;
+    cca3:         string;
+    cioc?:        string;
+    independent?: boolean;
+    status:       Status;
+    unMember:     boolean;
+    currencies?:  Currencies;
+    idd:          Idd;
+    capital?:     string[];
+    altSpellings: string[];
+    region:       Region;
+    subregion?:   string;
+    languages?:   { [key: string]: string };
     translations: { [key: string]: Translation };
-    latlng?:       number[];
-    landlocked?:   boolean;
-    borders?:      string[];
-    area?:         number;
-    demonyms?:     Demonyms;
-    flag?:         string;
-    maps?:         Maps;
-    population?:   number;
-    gini?:         { [key: string]: number };
-    fifa?:         string;
-    car?:          Car;
-    timezones?:    string[];
-    continents?:   Continent[];
-    flags?:        CoatOfArms;
-    coatOfArms?:   CoatOfArms;
-    startOfWeek?:  StartOfWeek;
-    capitalInfo?:  CapitalInfo;
-    postalCode?:   PostalCode;
+    latlng:       number[];
+    landlocked:   boolean;
+    borders?:     string[];
+    area:         number;
+    demonyms?:    Demonyms;
+    flag:         string;
+    maps:         Maps;
+    population:   number;
+    gini?:        { [key: string]: number };
+    fifa?:        string;
+    car:          Car;
+    timezones:    string[];
+    continents:   Continent[];
+    flags:        CoatOfArms;
+    coatOfArms:   CoatOfArms;
+    startOfWeek:  StartOfWeek;
+    capitalInfo:  CapitalInfo;
+    postalCode?:  PostalCode;
 }
 
 export interface CapitalInfo {
@@ -42,7 +42,7 @@ export interface CapitalInfo {
 
 export interface Car {
     signs?: string[];
-    side?:  Side;
+    side:   Side;
 }
 
 export enum Side {
@@ -232,22 +232,22 @@ export interface Currencies {
 }
 
 export interface Aed {
-    name?:   string;
-    symbol?: string;
+    name:   string;
+    symbol: string;
 }
 
 export interface BAM {
-    name?: string;
+    name: string;
 }
 
 export interface Demonyms {
-    eng?: Eng;
+    eng:  Eng;
     fra?: Eng;
 }
 
 export interface Eng {
-    f?: string;
-    m?: string;
+    f: string;
+    m: string;
 }
 
 export interface Idd {
@@ -256,24 +256,24 @@ export interface Idd {
 }
 
 export interface Maps {
-    googleMaps?:     string;
-    openStreetMaps?: string;
+    googleMaps:     string;
+    openStreetMaps: string;
 }
 
 export interface Name {
-    common?:     string;
-    official?:   string;
+    common:      string;
+    official:    string;
     nativeName?: { [key: string]: Translation };
 }
 
 export interface Translation {
-    official?: string;
-    common?:   string;
+    official: string;
+    common:   string;
 }
 
 export interface PostalCode {
-    format?: string;
-    regex?:  string;
+    format: string;
+    regex?: string;
 }
 
 export enum Region {
